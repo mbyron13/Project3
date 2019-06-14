@@ -18,7 +18,8 @@ class Wrapper extends Component {
             lat: 42.3601,
             lng: -71.0589
         },
-        count: 0
+        count: 0,
+        shouldUpdate: false
     };
 
     handleButtonClick = (event) => {
@@ -27,18 +28,18 @@ class Wrapper extends Component {
     };
 
     forceRefresh() {
-        let count = this.state.count;
-        this.setState({ count: count++ });
+        // let update = this.state.shouldUpdate;
+        this.setState({ shouldUpdate: true });
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.state.count !== prevProps.count) {
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.shouldUpdate === true) {
             axios.get("http://localhost:3001/api/streets", {
                 headers: {
                     Authorization: '*'
                 }
             }).then((response) => {
-                this.setState({ streets: response.data })
+                this.setState({ streets: response.data, shouldUpdate: false });
             });
         }
     }
@@ -56,16 +57,18 @@ class Wrapper extends Component {
     render() {
         return (
             <Container style={{ height: "50%" }}>
-                <Jumbotron>
+                <Jumbotron className="justify-content-md-center">
                     <Row>
                         <Col>
+                            <PushForm forceRefresh={this.forceRefresh.bind(this)} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs sm md lg xl ="9">
                             <Googmap center={this.state.center} />
                         </Col>
-                        <Col>
+                        <Col xs sm md lg xl ="3">
                             <ButtonList streets={this.state.streets} onClick={this.handleButtonClick} />
-                        </Col>
-                        <Col>
-                            <PushForm forceRefresh={this.forceRefresh.bind(this)} />
                         </Col>
                     </Row>
                 </Jumbotron>

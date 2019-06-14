@@ -4,19 +4,18 @@ import {GoogleApiWrapper, Map, Marker} from "google-maps-react";
 require('dotenv').config();
 
 const style ={
-    width: "70%",
-    height: "80%"
+    width: "100%",
+    height: "90%"
 };
 
 class Googmap extends Component {
 
     render(props) {
         return (
-            <div style={{position: "relative", width: "1000px", height:"1000px"}}>
+            <div>
                 <Map google={this.props.google}
-                     zoom={13}
+                     zoom={16}
                      style={style}
-                     justify="center"
                      initialCenter={this.props.center}
                      center={this.props.center}>
                     <Marker onClick={this.onMarkerClick}
