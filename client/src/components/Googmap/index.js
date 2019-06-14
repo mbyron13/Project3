@@ -27,5 +27,5 @@ class Googmap extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: (REACT_APP_GOOGLESECRET)
+    apiKey: (process.env.REACT_APP_GOOGLESECRET)
 })(Googmap)
