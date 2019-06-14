@@ -1,4 +1,5 @@
 const express = require('express');
+var db = require("./models");
 
 const routes = require('./routes');
 var cors = require('cors');
@@ -16,6 +17,8 @@ app.use(cors());
 
 app.use(routes);
 
-app.listen(PORT, () =>
-console.log(`API SERVER NOW LISTENING ON PORT ${PORT}!`)
-);
+db.sequelize.sync().then(function() {
+app.listen(PORT, () => {
+console.log(`API SERVER NOW LISTENING ON PORT ${PORT}!`);
+});
+});
