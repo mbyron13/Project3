@@ -15,7 +15,7 @@ class PushForm extends React.Component {
         console.log(event.target);
         let data = new FormData(event.target);
         console.log(data);
-        axios.post("http://localhost:3001/api/streets", { name, lat, lng }).then(this.props.forceRefresh());
+        axios.post("/api/streets", { name, lat, lng }).then(this.props.forceRefresh());
     }
 
     onChange = (e) => {

@@ -34,7 +34,7 @@ class Wrapper extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (this.state.shouldUpdate === true) {
-            axios.get("http://localhost:3001/api/streets", {
+            axios.get("/api/streets", {
                 headers: {
                     Authorization: '*'
                 }
@@ -45,7 +45,7 @@ class Wrapper extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:3001/api/streets", {
+        axios.get("/api/streets", {
             headers: {
                 Authorization: '*'
             }
